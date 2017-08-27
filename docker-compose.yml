@@ -1,0 +1,38 @@
+version: '2'
+services:
+    web:
+        image: nginx
+        hostname: web
+        ports:
+            - "8080:80"
+        volumes:
+            - ./app:/app
+            - ./bin/conf/nginx/conf.d:/etc/nginx/conf.d
+        networks:
+            - code-network
+    php:
+        image: php:7.1-fpm
+        hostname: php
+        volumes:
+            - ./app:/app
+        networks:
+            - code-network
+    mysql:
+        image: mysql
+        hostname: mysql
+        ports:
+            - "6068:3306"
+        volumes:
+            - ./bin/datadir/mysql:/var/lib/mysql
+            - ./bin/conf/mysql/my.cnf:/etc/my.cnf
+        networks:
+            - code-network
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: test
+            MYSQL_USER: docker
+            MYSQL_PASSWORD: docker
+
+networks:
+    code-network:
+        driver: bridge
