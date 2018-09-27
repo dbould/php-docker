@@ -8,6 +8,8 @@ docker-compose up
 ## App address
 http://myapp.test
 
+You should get a "DOCKER WORK" message.
+
 To change, edit the hostname docker-compose.yml
 You will also need to edit your local machine's hosts file. In OSX and Linux it's in /etc/hosts.
 
