@@ -11,20 +11,20 @@ services:
         networks:
             - code-network
     php:
-        image: php:7.2-fpm
+        build: ./
         hostname: php
         volumes:
             - ./app:/app
         networks:
             - code-network
     mysql:
-        image: mysql
+        image: mysql:5.7
         hostname: mysql
+        container_name: mysql
         ports:
             - "6068:3306"
         volumes:
             - ./bin/datadir/mysql:/var/lib/mysql
-            - ./bin/conf/mysql/my.cnf:/etc/my.cnf
         networks:
             - code-network
         environment:
